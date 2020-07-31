@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<title>Insert title here</title>
+<style>
+.card {
+	display: inline-block;
+	line-height: 50px;
+	width: 100px;
+	text-align: center;
+	background-color: steelblue;
+	color: #fff;
+	/* border-radius: 4px; */
+	/* margin: 3px; */
+	border: 0.1px solid #d0d0d0;
+	font-size: 30px;
+}
+
+.card {
+	max-width: 360px;
+}
+
+#shuffle {
+	width: 100%;
+	height: 35px;
+	border-radius: 8px;
+	background-color: #72C3DC;
+	border: 1px solid transparent;
+	color: #ffffff;
+}
+
+.btn_sort {
+	width: 100%;
+	height: 35px;
+	border-radius: 8px;
+	background-color: #72C3DC;
+	border: 1px solid transparent;
+	color: #ffffff;
+	margin-top: 5%;
+}
+
+.floatLeft {
+	float: left;
+}
+
+.floatRight {
+	float: right;
+}
+
+.cardDiv {
+	padding: 1%;
+	border: 1px solid transparent;
+	box-shadow: 2px 5px #BFBFBF;
+	background-color: #EFEFEF;
+}
+
+h3 {
+	text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+	h3 {
+		color: #ffffff;
+	}
+	.titleDiv {
+		background-color: #2F454E;
+	}
+	#shuffle {
+		width: 100%;
+		height: 35px;
+		border-radius: 8px;
+		background-color: #72C3DC;
+		border: 1px solid transparent;
+		color: #ffffff;
+		margin-top: 5%;
+		padding-left: 12%;
+		padding-right: 12%;
+	}
+	.btn_sort {
+		width: 100%;
+		height: 35px;
+		border-radius: 8px;
+		background-color: #72C3DC;
+		border: 1px solid transparent;
+		color: #ffffff;
+		margin-left: 5%;
+		padding-left: 12%;
+		padding-right: 12%;
+	}
+	.btnDiv.floatLeft {
+		display: inline-flex;
+		padding-left: 30%;
+		padding-top: 5%;
+	}
+	.card {
+		background-color: #d0d0d0 !important;
+		max-width: 600px;
+		width: 335px;
+		margin-left: 4%;
+		margin-right: 0%;
+		margin-top: 1%;
+	}
+	#gridCardDiv {
+		padding-top: 5%;
+	}
+	.cardDiv {
+		padding: 0;
+		border: none;
+		box-shadow: none;
+	}
+}
+</style>
+</head>
+<body>
+	<div class="row titleDiv">
+		<div class="col-md-10">
+			<h3>Shuffle and Sort</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 cardDiv">
+			<div id="gridCardDiv" class="col-md-4 floatLeft"></div>
+			<div class="col-md-2 btnDiv floatLeft">
+				<button class="btn_shuffle" id="shuffle">Shuffle</button>
+				<br />
+				<button class="btn_sort">Sort</button>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script>
+		var grid = $('#gridCardDiv');
+
+		for (var i = 1; i <= 9; i++) {
+			grid.append('<div class="card floatLeft" id="cardNo'+i+'">' + i
+					+ '</div>');
+			$("#cardNo1").css("background-color", "#6F98A8");
+			$("#cardNo2").css("background-color", " #2B8EAD");
+			$("#cardNo3").css("background-color", "#2F454E");
+			$("#cardNo4").css("background-color", " #2B8EAD");
+			$("#cardNo5").css("background-color", "#2F454E");
+			$("#cardNo6").css("background-color", "#BFBFBF");
+			$("#cardNo7").css("background-color", "#BFBFBF");
+			$("#cardNo8").css("background-color", "#6F98A8");
+			$("#cardNo9").css("background-color", "#2F454E");
+
+		}
+
+		$(".btn_shuffle").click(function() {
+			var cardNumbers = [];
+
+			$('.card').each(function() {
+				cardNumbers.push(this.innerHTML);
+			});
+
+			var lengthOfCards = cardNumbers.length - 1;
+			var swapCards;
+			var temp;
+
+			for (var i = lengthOfCards; i > 0; i--) {
+				swapCards = Math.floor(Math.random() * (i + 1));
+				temp = cardNumbers[i];
+				cardNumbers[i] = cardNumbers[swapCards];
+				cardNumbers[swapCards] = temp;
+			}
+
+			i = 0;
+
+			$('.card').each(function() {
+				this.innerHTML = cardNumbers[i];
+				i++;
+			});
+		});
+
+		$(".btn_sort").click(function() {
+			var cardNumbers = [];
+
+			$('.card').each(function() {
+				cardNumbers.push(+this.innerHTML);
+			});
+
+			cardNumbers.sort();
+
+			i = 0;
+
+			$('.card').each(function() {
+				this.innerHTML = cardNumbers[i];
+				i++;
+			});
+		});
+	</script>
+</body>
+</html>
